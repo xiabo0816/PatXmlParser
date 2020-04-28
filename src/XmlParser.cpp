@@ -4,7 +4,6 @@
 #include "XmlParser.h"
 #include "../pugixml/pugixml.hpp"
 #include "../inifile2/inifile.h"
-#include <direct.h>
 #include <set>
 #include <map>
 #include <algorithm>
@@ -15,6 +14,23 @@
 #define MAX_SENT_LEN	1024 * 100
 #define EXTRA_INFO_SEPARATOR	';'
 #define EXTRA_INFO_MAXNUM		256
+
+#ifdef _WIN32
+#include "stdafx.h"
+#include <direct.h>  
+#include <atlbase.h>
+#define mkdir(a) mkdir((a))  
+#define I64dlld "I64d"
+#endif
+
+#ifndef _WIN32
+#include <unistd.h>
+#include <math.h>
+#include <sys/types.h> 
+#include <sys/stat.h>
+#define mkdir(a) mkdir((a),0777)
+#define I64dlld "lld"
+#endif
 
 using namespace inifile;
 using namespace pugi;

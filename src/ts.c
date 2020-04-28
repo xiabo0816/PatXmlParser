@@ -2,14 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#ifdef _WIN32
-#include <windows.h>
-#include <process.h>
-
-struct mutex_t {
-    CRITICAL_SECTION	m_cs;
-};
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -19,6 +11,14 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
+
+#ifdef _WIN32
+#include <windows.h>
+#include <process.h>
+
+struct mutex_t {
+    CRITICAL_SECTION	m_cs;
+};
 
 mutex_t* mutex_create()
 {
